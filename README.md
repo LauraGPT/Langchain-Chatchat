@@ -232,6 +232,13 @@ chatchat init
 `http://127.0.0.1:8000/v1`，支持 `sensevoice`、`paraformer`、
 `paraformer-en` 和 `fun-asr-nano`。先启动 FunASR 服务：
 
+建议为 FunASR 服务使用独立虚拟环境，避免与 Langchain-Chatchat 的依赖约束冲突。
+运行下面的安装命令前，先根据 [PyTorch 安装说明](https://pytorch.org/get-started/locally/)
+安装适合当前平台的匹配版本 PyTorch 和 Torchaudio；`pip install funasr` 不会替你选择它们。
+首次转写可能需要下载模型权重。平台中的模型名称需与实际部署的服务匹配；
+配置列表本身不会下载或部署所有模型。`127.0.0.1` 指 Langchain-Chatchat
+服务所在的主机或容器，分开部署时请使用服务端可访问的地址。
+
 ```shell
 pip install -U funasr fastapi uvicorn python-multipart
 funasr-server --model sensevoice --device cpu

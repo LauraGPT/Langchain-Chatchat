@@ -368,6 +368,16 @@ The default `MODEL_PLATFORMS` includes a local `funasr` platform at
 `http://127.0.0.1:8000/v1`, with `sensevoice`, `paraformer`, `paraformer-en`,
 and `fun-asr-nano`. Start the FunASR service first:
 
+Use a separate virtual environment for the FunASR service to avoid conflicts
+with Langchain-Chatchat's dependency constraints. Before running the commands
+below, install matching PyTorch and Torchaudio builds for your platform using
+the [PyTorch installation guide](https://pytorch.org/get-started/locally/);
+`pip install funasr` does not select those builds for you. First transcription
+may download model weights. Configured model names must match the deployed
+service; the platform list does not download or deploy every model.
+`127.0.0.1` refers to the Langchain-Chatchat host or container. For separate
+deployments, use an address reachable from that server.
+
 ```shell
 pip install -U funasr fastapi uvicorn python-multipart
 funasr-server --model sensevoice --device cpu
